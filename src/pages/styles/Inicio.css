@@ -1,0 +1,66 @@
+.slider{
+    width: 95%;
+    height: 50%;
+    margin-left: 2.5%;
+    overflow: hidden;
+}
+.slider ul{
+    display: flex;
+    padding: 0;
+    width: 400%;
+    height: 100%;
+    animation: cambio 20s infinite linear;
+    animation-direction: alternate;
+}
+.slider li{
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+.slider img{
+    height: 100%;
+    width: 100%; 
+}
+@keyframes cambio{
+    0% { margin-left: 0; }
+    20% { margin-left: 0; }
+
+    25% { margin-left: -100%; }
+    45% { margin-left: -100%; }
+
+    50% { margin-left: -200%; }
+    70% { margin-left: -200%; }
+
+    75% { margin-left: -300%; }
+    100% { margin-left: -300%; }
+}
+.frases{
+	width: 65%;
+	height: 50%;
+    margin-left: 20%;
+    margin-bottom: 0%;
+	overflow: hidden;
+}
+.frases ul{
+    margin-bottom: 0%;
+	display: flex;
+	padding: 0;
+	width: 400%;
+	height: 100%;
+	animation: cambio 20s infinite  linear;
+	animation-direction: alternate;
+}
+.frases li{
+	height: 100%;
+	width: 100%;
+	list-style: none;
+}
+.frases p{
+	height: 100%;
+	width: 100%; 
+	font-family  :"Jenna sue";
+	font-size: 20px;
+}
+.frases .autor{
+	font-weight: bold;
+}

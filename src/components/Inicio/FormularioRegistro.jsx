@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState} from 'react'
+import axios from 'axios'
 
 const styles = {
     inputsForm:{
@@ -18,13 +19,78 @@ const styles = {
 }
 
 const FormularioRegistro = () =>{
+
+    const contenedor = {
+            NombreBibliotecario:"",
+            ApellidoBibliotecario:"",
+            Correo:"",
+            Contraseña:""
+        }
+
+
+    const [nombre, setNombre] = useState("")
+    const [apellido, setApellido] = useState("")
+    const [correo, setCorreo] = useState("")
+    const [clave, setClave] = useState("")
+
+    const handleRegistro = (e) =>{
+        e.preventDefault()
+
+        contenedor.NombreBibliotecario = nombre
+        contenedor.ApellidoBibliotecario = apellido
+        contenedor.Correo = correo
+        contenedor.Contraseña = clave
+
+        axios.post(`http://localhost:49827/api/Bibliotecarios`,contenedor)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+          })
+    }
+
+
     return(
-        <form className="d-flex flex-column mx-4 my-4">
-            <input style={styles.inputsForm} className="my-2" type="text" name="nombre"  placeholder="Nombre*"/>
-            <input style={styles.inputsForm} className="my-2" type="password" name="apellido" placeholder="Apellido*"/>
-            <input style={styles.inputsForm} className="my-2" type="text" name="correo"  placeholder="Correo*"/>
-            <input style={styles.inputsForm} className="my-2" type="password" name="clave" placeholder="Contraseña*"/>
-            <input style={styles.botonIniciar} className="my-3 py-1" type="button" value="Iniciar"/>
+        <form 
+            onSubmit={handleRegistro}
+            className="d-flex flex-column mx-4 my-4">
+            <input 
+                style={styles.inputsForm} 
+                className="my-2" 
+                type="text" 
+                name="nombre"  
+                placeholder="Nombre*"
+                onChange={(e)=>{setNombre(e.target.value)}}
+            />
+            <input 
+                style={styles.inputsForm} 
+                className="my-2" 
+                type="text" 
+                name="apellido" 
+                placeholder="Apellidos*"
+                onChange={(e)=>{setApellido(e.target.value)}}
+            />
+            <input 
+                style={styles.inputsForm} 
+                className="my-2" 
+                type="text" 
+                name="correo"  
+                placeholder="Correo*"
+                onChange={(e)=>{setCorreo(e.target.value)}}
+            />
+            <input 
+                style={styles.inputsForm} 
+                className="my-2" 
+                type="password" 
+                name="clave"
+                onChange={(e)=>{setClave(e.target.value)}}
+            />
+            <button 
+                style={styles.botonIniciar} 
+                type="submit" 
+                className="my-3 py-1" 
+                value="registrar">
+                    Registrar
+            </button>
         </form>
     )
 }

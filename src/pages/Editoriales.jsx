@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../components/home/Header'
 
 const styles = {
@@ -18,7 +18,15 @@ const styles = {
 }
 
 const Editoriales = (props) =>{
+
     const {title} = props
+    const [nombreEditorial, setNombreEditorial] = useState("")
+    const [ciudadEditorial, setCiudadEditorial] = useState("")
+    const handleEditorial = (e) =>{
+        e.preventDefault()
+        console.log(nombreEditorial)
+        console.log(ciudadEditorial)
+    }
 
     return(
         <div style={styles.general}>
@@ -27,7 +35,7 @@ const Editoriales = (props) =>{
                 <div className="text-center pt-3 pb-2">
                     <p>Agregar Editorial</p>
                 </div>
-                <form className="d-flex flex-column text-center">
+                <form onSubmit={handleEditorial} className="d-flex flex-column text-center">
                     <div>
                         <label 
                             className="ml-5 mb-3 mt-3">
@@ -38,6 +46,7 @@ const Editoriales = (props) =>{
                             className="ml-3 mb-3 mt-3 border border-white" 
                             type="text" 
                             name="nombre"
+                            onChange={(e)=>{setNombreEditorial(e.target.value)}}
                         />
                     </div>
                     <div>
@@ -49,7 +58,8 @@ const Editoriales = (props) =>{
                             style={styles.inputEditorial} 
                             className="ml-3 mb-3 mt-3 border border-white" 
                             type="text" 
-                            name="nacionalidad"
+                            name="ciudad"
+                            onChange={(e)=>{setCiudadEditorial(e.target.value)}}
                         />
                     </div>
                     <div className="text-center">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../components/home/Header'
 
 const styles = {
@@ -20,6 +20,16 @@ const styles = {
 const Autores = (props) =>{
 
     const {title} = props
+    const [nombre, setNombre] = useState("")
+    const [apellido, setApellido] = useState("")
+    const [nacionalidad, setNacionalidad] = useState("")
+
+    const handleAutor = (e) =>{
+        e.preventDefault()
+        console.log(nombre)
+        console.log(apellido)
+        console.log(nacionalidad)
+    }
 
     return(
         <div style={styles.general}>
@@ -28,13 +38,15 @@ const Autores = (props) =>{
                 <div className="text-center pt-3 pb-2">
                     <p>Agregar Autor</p>
                 </div>
-                <form className="d-flex flex-column">
+                <form onSubmit={handleAutor} className="d-flex flex-column">
                     <div className="d-flex flex-row">
                         <label className="ml-5 mb-3 mt-3">Nombre: </label>
                         <input 
                             style={styles.inputAutor} 
                             className="ml-3 mb-3 mt-3 border border-white" 
-                            type="text" name="nombre"
+                            type="text" 
+                            name="nombre"
+                            onChange={(e) => {setNombre(e.target.value)}}
                         />
                         <label className="ml-5 mb-3 mt-3">Apellido: </label>
                         <input 
@@ -42,6 +54,7 @@ const Autores = (props) =>{
                             className="ml-3 mb-3 mt-3 border border-white" 
                             type="text" 
                             name="apellido"
+                            onChange={(e) => {setApellido(e.target.value)}}
                         />
                     </div>
                     <div className="d-flex flex-row">
@@ -51,6 +64,7 @@ const Autores = (props) =>{
                             className="ml-3 mb-3 mt-3 border border-white" 
                             type="text" 
                             name="nacionalidad"
+                            onChange={(e) => {setNacionalidad(e.target.value)}}
                         />
                     </div>
                     <div className="text-center">

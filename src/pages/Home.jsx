@@ -15,7 +15,7 @@ const Home = () =>{
         return(
             <div className="d-flex flex-row">
                 <SideBar setPagina={setPagina}/>
-                <Inicio/>
+                <Inicio title={pagina}/>
             </div>
         )   
     }
