@@ -6,12 +6,17 @@ import Editoriales from './Editoriales'
 import Clientes from './Clientes'
 import Libros from './Libros'
 import Prestamos from './Prestamos'
+import {useHistory} from 'react-router-dom'
 
 const Home = () =>{
 
     const [pagina, setPagina] = useState("Inicio")
+    const [correo, setCorreo] = useState("")
+    const [clave, setClave] = useState("")
+    const history = useHistory();
 
     if (pagina === "Inicio") {
+
         return(
             <div className="d-flex flex-row">
                 <SideBar setPagina={setPagina}/>

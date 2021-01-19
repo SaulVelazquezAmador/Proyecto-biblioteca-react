@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 const styles = {
@@ -27,15 +28,14 @@ const FormularioRegistro = () =>{
             Contraseña:""
         }
 
-
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [correo, setCorreo] = useState("")
     const [clave, setClave] = useState("")
+    const history = useHistory();
 
     const handleRegistro = (e) =>{
         e.preventDefault()
-
         contenedor.NombreBibliotecario = nombre
         contenedor.ApellidoBibliotecario = apellido
         contenedor.Correo = correo
@@ -46,6 +46,7 @@ const FormularioRegistro = () =>{
             console.log(res);
             console.log(res.data);
           })
+        history.push("/home");
     }
 
 
