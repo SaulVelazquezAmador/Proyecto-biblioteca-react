@@ -3,24 +3,24 @@ import Axios from 'axios'
 
 const styles = {
     Conttabla:{
-        margin                    : "auto}",
-        borderCollapse            :"collapse",
-        backgroundColor           :"#ffffff",
-        width                     : "90%",
-        height                    : "40vh",
-        borderBottomLeftRadius    : "10px",
-        borderBottomRightRadius   : "10px",
-        borderTopLeftRadius       : "10px",
-        borderTopRightRadius      : "10px",
-        boxShadow : "2px 2px 2px 2px #757575",
-        overflow: "auto"
+        margin                 : "auto}",
+        borderCollapse         : "collapse",
+        backgroundColor        : "#ffffff",
+        width                  : "90%",
+        height                 : "30vh",
+        borderBottomLeftRadius : "10px",
+        borderBottomRightRadius: "10px",
+        borderTopLeftRadius    : "10px",
+        borderTopRightRadius   : "10px",
+        boxShadow              : "2px 2px 2px 2px #757575",
+        overflow               : "auto"
     },
     tabla:{
         width: "100%"
     }
 }
 
-const TablaAutores = (props) =>{
+const TablaClientes = (props) =>{
 
     const {data} = props
 
@@ -31,22 +31,26 @@ const TablaAutores = (props) =>{
                     <tr className="py-1">
                         <th className="px-3">Nombre</th>
                         <th className="px-3">Apellido</th>
-                        <th className="px-3">Nacionalidad</th>
-                        <th className="px-3">Eliminar</th>
-                        <th className="px-3">Editar</th>
+                        <th className="px-3">Edad</th>
+                        <th className="px-3">Direccion</th>
+                        <th className="px-3">Correo</th>
+                        <th className="px-3">Telefono</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        data.map((autor,index)=>(
+                        data.map((lector,index)=>(
                             <tr className="py-1" key={index}>
-                                <th>{autor.nombreAutor}</th>
-                                <th>{autor.apellidoAutor}</th>
-                                <th>{autor.nacionalidad}</th>
+                                <th>{lector.nombre}</th>
+                                <th>{lector.apellido}</th>
+                                <th>{lector.edad}</th>
+                                <th>{lector.direccion}</th>
+                                <th>{lector.correo}</th>
+                                <th>{lector.telefono}</th>
                                 <th>
                                     <button 
                                         onClick={()=>(
-                                            Axios.delete(`http://localhost:49827/api/Autor/${autor.idAutor}`)
+                                            Axios.delete(`http://localhost:49827/api/Lector/${lector.idLector}`)
                                             .then(res => {
                                                 console.log(res);
                                                 console.log(res.config.data);
@@ -67,4 +71,4 @@ const TablaAutores = (props) =>{
     )
 }
 
-export default TablaAutores
+export default TablaClientes

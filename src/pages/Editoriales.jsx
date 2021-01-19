@@ -1,5 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Header from '../components/home/Header'
+import TablaEditoriales from '../components/home/TablaEditoriales'
+import Axios from 'axios'
 
 const styles = {
     form:{
@@ -18,15 +20,32 @@ const styles = {
 }
 
 const Editoriales = (props) =>{
-
+    const contenedor = {
+        NombreEditorial:"",
+    }
     const {title} = props
+    const [data, setData] = useState([])
     const [nombreEditorial, setNombreEditorial] = useState("")
-    const [ciudadEditorial, setCiudadEditorial] = useState("")
+
     const handleEditorial = (e) =>{
         e.preventDefault()
-        console.log(nombreEditorial)
-        console.log(ciudadEditorial)
+        contenedor.NombreEditorial = nombreEditorial
+
+        Axios.post(`http://localhost:49827/api/Editoriales`,contenedor)
+        .then(res => {
+            console.log(res);
+            console.log(res.config.data);
+        })
     }
+
+    async function fetchData() {
+        const res = await Axios.get(`http://localhost:49827/api/Editoriales`)
+        setData(res.data)
+    }
+
+    useEffect(()=>{
+        fetchData();
+    },[])
 
     return(
         <div style={styles.general}>
@@ -49,19 +68,6 @@ const Editoriales = (props) =>{
                             onChange={(e)=>{setNombreEditorial(e.target.value)}}
                         />
                     </div>
-                    <div>
-                        <label 
-                            className="ml-5 mb-3 mt-3">
-                            Ciudad: 
-                        </label>
-                        <input 
-                            style={styles.inputEditorial} 
-                            className="ml-3 mb-3 mt-3 border border-white" 
-                            type="text" 
-                            name="ciudad"
-                            onChange={(e)=>{setCiudadEditorial(e.target.value)}}
-                        />
-                    </div>
                     <div className="text-center">
                         <button 
                             style={styles.addEditorial} 
@@ -73,6 +79,7 @@ const Editoriales = (props) =>{
                     </div>
                 </form>
             </div>
+            <TablaEditoriales data={data}/>
         </div> 
     )
 }

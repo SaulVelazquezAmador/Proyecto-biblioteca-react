@@ -6,14 +6,18 @@ import Editoriales from './Editoriales'
 import Clientes from './Clientes'
 import Libros from './Libros'
 import Prestamos from './Prestamos'
+import Usuarios from './Usuarios'
 import {useHistory} from 'react-router-dom'
 
 const Home = () =>{
 
     const [pagina, setPagina] = useState("Inicio")
-    const [correo, setCorreo] = useState("")
-    const [clave, setClave] = useState("")
     const history = useHistory();
+
+    if (!localStorage.getItem("correo")) {
+        alert("Debe iniciar sesión")
+        history.push("/");
+    }
 
     if (pagina === "Inicio") {
 
@@ -65,10 +69,11 @@ const Home = () =>{
         )   
     }
     if (pagina === "Usuarios") {
+
         return(
             <div className="d-flex flex-row">
                 <SideBar setPagina={setPagina}/>
-                Usuarios :v
+                <Usuarios title={pagina}/>
             </div>
         )   
     }

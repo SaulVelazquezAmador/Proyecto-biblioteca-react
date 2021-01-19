@@ -20,7 +20,7 @@ const styles = {
     }
 }
 
-const TablaAutores = (props) =>{
+const TablaEditoriales = (props) =>{
 
     const {data} = props
 
@@ -30,23 +30,19 @@ const TablaAutores = (props) =>{
                 <thead className="border-bottom">
                     <tr className="py-1">
                         <th className="px-3">Nombre</th>
-                        <th className="px-3">Apellido</th>
-                        <th className="px-3">Nacionalidad</th>
                         <th className="px-3">Eliminar</th>
                         <th className="px-3">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        data.map((autor,index)=>(
+                        data.map((editorial,index)=>(
                             <tr className="py-1" key={index}>
-                                <th>{autor.nombreAutor}</th>
-                                <th>{autor.apellidoAutor}</th>
-                                <th>{autor.nacionalidad}</th>
+                                <th>{editorial.nombreEditorial}</th>
                                 <th>
                                     <button 
                                         onClick={()=>(
-                                            Axios.delete(`http://localhost:49827/api/Autor/${autor.idAutor}`)
+                                            Axios.delete(`http://localhost:49827/api/Editoriales/${editorial.idEditorial}`)
                                             .then(res => {
                                                 console.log(res);
                                                 console.log(res.config.data);
@@ -67,4 +63,4 @@ const TablaAutores = (props) =>{
     )
 }
 
-export default TablaAutores
+export default TablaEditoriales
