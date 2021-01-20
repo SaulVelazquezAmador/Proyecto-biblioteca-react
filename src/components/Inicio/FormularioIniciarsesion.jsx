@@ -32,6 +32,7 @@ const FormularioIniciarsesion = () =>{
     const history = useHistory();
 
     useEffect(()=>{
+        localStorage.clear();
         async function fetchData() {
             const res = await Axios.get(`http://localhost:49827/api/Bibliotecarios`)
             setData(res.data)
@@ -43,7 +44,7 @@ const FormularioIniciarsesion = () =>{
         e.preventDefault()
         contenedor.Correo = correo
         contenedor.Contraseña = clave
-        console.log(data)
+        console.log(data)// eslint-disable-next-line
         data.map((b)=>{
             if (b.correo === correo && b.contraseña === clave) {
                 localStorage.setItem("correo", correo);

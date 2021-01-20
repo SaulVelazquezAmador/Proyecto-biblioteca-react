@@ -19,7 +19,7 @@ const styles = {
     }
 }
 
-const TablaClientes = (props) =>{
+const TablaLibros = (props) =>{
 
     const {data, handleDelete} = props
 
@@ -28,27 +28,23 @@ const TablaClientes = (props) =>{
             <table className="text-center" style={styles.tabla}>
                 <thead className="border-bottom">
                     <tr className="py-1">
-                        <th className="px-3">Nombre</th>
-                        <th className="px-3">Apellido</th>
-                        <th className="px-3">Edad</th>
-                        <th className="px-3">Direccion</th>
-                        <th className="px-3">Correo</th>
-                        <th className="px-3">Telefono</th>
+                        <th className="px-3">ISBN</th>
+                        <th className="px-3">Titulo</th>
+                        <th className="px-3">Año</th>
+                        <th className="px-3">Existencias</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        data.map((lector,index)=>(
+                        data.map((libro,index)=>(
                             <tr className="py-1" key={index}>
-                                <th>{lector.nombre}</th>
-                                <th>{lector.apellido}</th>
-                                <th>{lector.edad}</th>
-                                <th>{lector.direccion}</th>
-                                <th>{lector.correo}</th>
-                                <th>{lector.telefono}</th>
+                                <th>{libro.isbn}</th>
+                                <th>{libro.titulo}</th>
+                                <th>{libro.año}</th>
+                                <th>{libro.existencias}</th>
                                 <th>
                                     <button 
-                                        onClick={()=>(handleDelete(lector))} 
+                                        onClick={()=>(handleDelete(libro))} 
                                         type="button" 
                                         className="btn btn-sm btn-danger">
                                             Eliminar
@@ -64,4 +60,4 @@ const TablaClientes = (props) =>{
     )
 }
 
-export default TablaClientes
+export default TablaLibros

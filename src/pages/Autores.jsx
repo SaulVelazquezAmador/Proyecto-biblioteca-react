@@ -33,6 +33,16 @@ const Autores = (props) =>{
     const [nacionalidad, setNacionalidad] = useState("")
     const [data, setData] = useState([])
 
+    const handleDelete = (autor) =>{
+        Axios.delete(`http://localhost:49827/api/Autor/${autor.idAutor}`)
+        .then(() => {
+            Axios.get(`http://localhost:49827/api/Autor`)
+            .then(res =>{
+                setData(res.data)
+            })
+          })
+    }
+
     const handleAutor = (e) =>{
         e.preventDefault()
         contenedor.NombreAutor = nombre
@@ -40,11 +50,12 @@ const Autores = (props) =>{
         contenedor.Nacionalidad = nacionalidad
 
         Axios.post(`http://localhost:49827/api/Autor`,contenedor)
-        .then(res => {
-            console.log(res);
-            console.log(res.config.data);
+        .then(() => {
+            Axios.get(`http://localhost:49827/api/Autor`)
+            .then(res =>{
+                setData(res.data)
+            })
         })
-        fetchData();
     }
 
     async function fetchData() {
@@ -103,8 +114,7 @@ const Autores = (props) =>{
                     </div>
                 </form>
             </div>
-            {console.log(data)}
-            <TablaAutores data={data}/>
+            <TablaAutores handleDelete={handleDelete} data={data}/>
         </div>
     )
 }

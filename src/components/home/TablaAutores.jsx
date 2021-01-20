@@ -1,5 +1,4 @@
 import React from 'react'
-import Axios from 'axios'
 
 const styles = {
     Conttabla:{
@@ -22,7 +21,7 @@ const styles = {
 
 const TablaAutores = (props) =>{
 
-    const {data} = props
+    const {data,handleDelete} = props
 
     return(
         <div className="text-center ml-5" style={styles.Conttabla}>
@@ -33,7 +32,6 @@ const TablaAutores = (props) =>{
                         <th className="px-3">Apellido</th>
                         <th className="px-3">Nacionalidad</th>
                         <th className="px-3">Eliminar</th>
-                        <th className="px-3">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,19 +43,13 @@ const TablaAutores = (props) =>{
                                 <th>{autor.nacionalidad}</th>
                                 <th>
                                     <button 
-                                        onClick={()=>(
-                                            Axios.delete(`http://localhost:49827/api/Autor/${autor.idAutor}`)
-                                            .then(res => {
-                                                console.log(res);
-                                                console.log(res.config.data);
-                                              })
-                                        )} 
+                                        onClick={()=>(handleDelete(autor))} 
                                         type="button" 
                                         className="btn btn-sm btn-danger">
                                             Eliminar
                                     </button>
                                 </th>
-                                <th><button type="button" className="btn btn-sm btn-primary">Editar</button></th>
+                                {/* <th><button type="button" className="btn btn-sm btn-primary">Editar</button></th> */}
                             </tr>
                         ))
                     }

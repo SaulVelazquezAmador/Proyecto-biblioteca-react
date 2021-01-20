@@ -46,6 +46,9 @@ const FormularioRegistro = () =>{
             console.log(res);
             console.log(res.data);
           })
+        
+        localStorage.setItem("correo", correo);
+        localStorage.setItem("clave", clave);
         history.push("/home");
     }
 

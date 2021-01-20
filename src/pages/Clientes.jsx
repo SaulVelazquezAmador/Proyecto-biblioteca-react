@@ -40,6 +40,16 @@ const Clientes = (props) =>{
     const [data, setData] = useState([])
     const {title} = props
 
+    const handleDelete = (lector) =>{
+        Axios.delete(`http://localhost:49827/api/Lector/${lector.idLector}`)
+        .then(() => {
+            Axios.get(`http://localhost:49827/api/Lector`)
+            .then(res =>{
+                setData(res.data)
+            })
+          })
+    }
+
     const handleCliente = (e) =>{
         e.preventDefault()
         contenedor.nombre = nombre
@@ -50,9 +60,11 @@ const Clientes = (props) =>{
         contenedor.telefono = telefono
         console.log(contenedor)
         Axios.post(`http://localhost:49827/api/Lector`,contenedor)
-        .then(res => {
-            console.log(res);
-            console.log(res.config.data);
+        .then(() => {
+            Axios.get(`http://localhost:49827/api/Lector`)
+            .then(res =>{
+                setData(res.data)
+            })
         })
         fetchData();
     }
@@ -120,7 +132,7 @@ const Clientes = (props) =>{
                                 className="ml-3 mb-3 mt-3 border border-white rounded-top rounded-bottom" 
                                 type="text" 
                                 name="telefono"
-                                onChange={(e)=>{setTelefono(parseInt(e.target.value))}}
+                                onChange={(e)=>{setTelefono(e.target.value)}}
                                 />
                     </div>
                     <div className="text-center">
@@ -131,7 +143,7 @@ const Clientes = (props) =>{
                     </div>
                 </form>
             </div>
-            <TablaClientes data={data}/>
+            <TablaClientes handleDelete={handleDelete} data={data}/>
         </div>
     )
 }

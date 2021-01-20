@@ -77,6 +77,10 @@ const Home = () =>{
             </div>
         )   
     }
+    // Cerrar Sesión
+    if (pagina === "Cerrar Sesión") {
+        history.push("/");
+    }
 }
 
 export default Home

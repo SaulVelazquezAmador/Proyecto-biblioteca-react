@@ -1,5 +1,4 @@
 import React from 'react'
-import Axios from 'axios'
 
 const styles = {
     Conttabla:{
@@ -22,7 +21,7 @@ const styles = {
 
 const TablaEditoriales = (props) =>{
 
-    const {data} = props
+    const {data, handleDeleteEditorial} = props
 
     return(
         <div className="text-center ml-5" style={styles.Conttabla}>
@@ -31,7 +30,7 @@ const TablaEditoriales = (props) =>{
                     <tr className="py-1">
                         <th className="px-3">Nombre</th>
                         <th className="px-3">Eliminar</th>
-                        <th className="px-3">Editar</th>
+                        {/* <th className="px-3">Editar</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -41,19 +40,13 @@ const TablaEditoriales = (props) =>{
                                 <th>{editorial.nombreEditorial}</th>
                                 <th>
                                     <button 
-                                        onClick={()=>(
-                                            Axios.delete(`http://localhost:49827/api/Editoriales/${editorial.idEditorial}`)
-                                            .then(res => {
-                                                console.log(res);
-                                                console.log(res.config.data);
-                                              })
-                                        )} 
+                                        onClick={()=>(handleDeleteEditorial(editorial))} 
                                         type="button" 
                                         className="btn btn-sm btn-danger">
                                             Eliminar
                                     </button>
                                 </th>
-                                <th><button type="button" className="btn btn-sm btn-primary">Editar</button></th>
+                                {/* <th><button type="button" className="btn btn-sm btn-primary">Editar</button></th> */}
                             </tr>
                         ))
                     }

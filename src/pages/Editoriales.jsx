@@ -27,14 +27,27 @@ const Editoriales = (props) =>{
     const [data, setData] = useState([])
     const [nombreEditorial, setNombreEditorial] = useState("")
 
+
+    const handleDeleteEditorial = (editorial) =>{
+       Axios.delete(`http://localhost:49827/api/Editoriales/${editorial.idEditorial}`)
+        .then(() => {
+            Axios.get(`http://localhost:49827/api/Editoriales`)
+            .then(res =>{
+                setData(res.data)
+            })
+          })
+    }
+
     const handleEditorial = (e) =>{
         e.preventDefault()
         contenedor.NombreEditorial = nombreEditorial
 
         Axios.post(`http://localhost:49827/api/Editoriales`,contenedor)
-        .then(res => {
-            console.log(res);
-            console.log(res.config.data);
+        .then(() => {
+            Axios.get(`http://localhost:49827/api/Editoriales`)
+            .then(res =>{
+                setData(res.data)
+            })
         })
     }
 
@@ -79,7 +92,7 @@ const Editoriales = (props) =>{
                     </div>
                 </form>
             </div>
-            <TablaEditoriales data={data}/>
+            <TablaEditoriales handleDeleteEditorial={handleDeleteEditorial} data={data}/>
         </div> 
     )
 }
